@@ -1,5 +1,7 @@
 # Hardwear.io 2018 badge
 
+<img src="pictures/badge.jpg" width="600px"/>
+
 The Hardwear.io 2018 badge is a reader that will read NFC business cards and store the details in its 512kB memory.
 
 When connected to a PC, it will be seen as a flash drive with a FAT file-system and you will be able to retrieve the business cards as vCard files.
