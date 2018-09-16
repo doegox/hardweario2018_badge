@@ -51,9 +51,17 @@ To charge the battery, set switch in DOWN position. At the bottom of the badge, 
 
 ## Challenge
 
-For those participating to our hardware CTF, a challenge is hidden in the badge. You'll have to meet Mr FLAG... or maybe you'll find a way without his business card...
+For those who participated to our hardware CTF, a challenge was hidden in the badge. *You'll have to meet Mr FLAG... or maybe you'll find a way without his business card...*
 
-## Firmware
+## Flashing precompiled firmware
+
+To flash one of the firmware releases available in [firmware_releases], quickly shortcut *twice* RST & GND on the Pro Micro, directly followed by:
+
+```
+~/.arduino15/packages/arduino/tools/avrdude/6.3.0-arduino9/bin/avrdude -C ~/.arduino15/packages/arduino/tools/avrdude/6.3.0-arduino9/etc/avrdude.conf -v -patmega32u4 -cavr109 -P/dev/ttyACM0 -b57600 -D -Uflash:w:hardweario2018_v1.3.hex:i
+```
+
+## Compiling Firmware
 
 Read [firmware] instructions.
 
