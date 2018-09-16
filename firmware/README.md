@@ -38,7 +38,7 @@ cd ~/Arduino/libraries
 git clone https://github.com/greiman/SSD1306Ascii.git
 ```
 
-NFC library: based on [https://github.com/miguelbalboa/rfid.git] but heavily modified and shrunk. It is now part of the badge source files (cf `MFRC522ntag.*` files).
+NFC library: based on https://github.com/miguelbalboa/rfid.git but heavily modified and shrunk. It is now part of the badge source files (cf `MFRC522ntag.*` files).
 
 SCSI/Dataflash/diskio/FAT are also already present in the sources.
 

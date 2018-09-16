@@ -55,7 +55,7 @@ For those who participated to our hardware CTF, a challenge was hidden in the ba
 
 ## Flashing precompiled firmware
 
-To flash one of the firmware releases available in [firmware_releases], quickly shortcut *twice* RST & GND on the Pro Micro, directly followed by:
+To flash one of the firmware releases available in [firmware_releases](firmware_releases), quickly shortcut *twice* RST & GND on the Pro Micro, directly followed by:
 
 ```
 ~/.arduino15/packages/arduino/tools/avrdude/6.3.0-arduino9/bin/avrdude -C ~/.arduino15/packages/arduino/tools/avrdude/6.3.0-arduino9/etc/avrdude.conf -v -patmega32u4 -cavr109 -P/dev/ttyACM0 -b57600 -D -Uflash:w:hardweario2018_v1.3.hex:i
@@ -63,14 +63,14 @@ To flash one of the firmware releases available in [firmware_releases], quickly 
 
 ## Compiling Firmware
 
-Read [firmware] instructions.
+Read [firmware instructions](firmware/README.md).
 
 * v1.2: initial version of the badges distributed at Hardwear.io 2018
 * v1.3: accepts more variants of vCard MIME types, contains more faces
 
 ## Hardware upgrade
 
-Quoting [https://github.com/miguelbalboa/rfid/blob/master/README.rst] :
+Quoting https://github.com/miguelbalboa/rfid/blob/master/README.rst :
 
 *Some boards bought from chinese manufactures do not use the best components and this can affect the detection of different types of tag/card. In some of these boards, the L1 and L2 inductors do not have a high enough current so the signal generated is not enough to get Ultralight C and NTAG203 tags to work, replacing those with same inductance (2.2uH) but higher operating current inductors should make things work smoothly. Also, in some of those boards the harmonic and matching circuit needs to be tuned, for this replace C4 and C5 with 33pf capacitors and you are all set. (Source: [Mikro Elektronika](https://forum.mikroe.com/viewtopic.php?f=147&t=64203))*
 
@@ -81,13 +81,13 @@ We confirm changing L1, L2, C4 & C5 beefs up the performances and allows reading
 The badge contains several standard elements you can harvest for your own projects:
 
 * OLED SSD1306 128x64
-  * info on [https://www.adafruit.com/product/938] (but only I2C)
+  * info on https://www.adafruit.com/product/938 (but only I2C)
 * MFRC522 board
-  * info on [https://playground.arduino.cc/Learning/MFRC522]
+  * info on https://playground.arduino.cc/Learning/MFRC522
 * TXB0108 level shifter board
-  * info on [https://www.adafruit.com/product/395]
+  * info on https://www.adafruit.com/product/395
 * Arduino Pro Micro Atmega32U4 5V 16MHz
-  * info on [https://www.sparkfun.com/products/12640]
+  * info on https://www.sparkfun.com/products/12640
 
 ## Credits
 
