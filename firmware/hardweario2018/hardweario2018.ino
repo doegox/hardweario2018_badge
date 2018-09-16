@@ -14,7 +14,7 @@ SSD1306AsciiWire oled;
 MFRC522 mfrc522;
 constexpr uint8_t SS_PIN = 10;
 
-#define VERSION "v1.2"
+#define VERSION "v1.3"
 
 //#define BADGEFLAG "FLAG{NfcHangMan}"
 #define BADGEFLAG "GNBC~HakAkek@oam"
@@ -25,17 +25,61 @@ constexpr uint8_t SS_PIN = 10;
 
 int16_t facedisplayindex=0;
 bool facedisplayed=false;
-#define FACES 4
+#define FACES 10
 FT(1,A,"   *   *")
-FT(1,B,"     //")
+FT(1,B,"")
+FT(1,C,"     //")
+FT(1,D,"")
+
 FT(2,A,"  |.   .|")
-FT(2,B,"     ^")
+FT(2,B,"")
+FT(2,C,"     ^")
+FT(2,D,"")
+
 FT(3,A,"   *   *")
-FT(3,B,"     ==")
+FT(3,B,"")
+FT(3,C,"     ==")
+FT(3,D,"")
+
 FT(4,A,"    \x7f \x7f")
-FT(4,B,"     <>")
-__FlashStringHelper* FTTA[]={FP(1,A), FP(2,A), FP(3,A), FP(4,A)};
-__FlashStringHelper* FTTB[]={FP(1,B), FP(2,B), FP(3,B), FP(4,B)};
+FT(4,B,"")
+FT(4,C,"     <>")
+FT(4,D,"")
+
+FT(5,A,"    ,.,")
+FT(5,B,"   ((())")
+FT(5,C,"  (|*_*|)")
+FT(5,D,"   c\\=/c")
+
+FT(6,A,"    ,.,")
+FT(6,B,"  ((~\"~))")
+FT(6,C," '(|o_o|)'")
+FT(6,D," ,..\\=/..,")
+
+FT(7,A,"     ,")
+FT(7,B," ,.'` `'.,")
+FT(7,C,"  |:o o:|")
+FT(7,D,"   \\(_)/")
+
+FT(8,A,"")
+FT(8,B,"  (\\___/)")
+FT(8,C,"   )o o(")
+FT(8,D,"  (_(_)_)")
+
+FT(9,A,"")
+FT(9,B,"  ((___))")
+FT(9,C,"   )* *(")
+FT(9,D," (==(_)==)")
+
+FT(10,A," ('('~')')")
+FT(10,B," ('|*_*|')")
+FT(10,C,"  (`\\=/`)")
+FT(10,D,"  '¯\\,/¯'")
+
+__FlashStringHelper* FTTA[]={FP(1,A), FP(2,A), FP(3,A), FP(4,A), FP(5,A), FP(6,A), FP(7,A), FP(8,A), FP(9,A), FP(10,A)};
+__FlashStringHelper* FTTB[]={FP(1,B), FP(2,B), FP(3,B), FP(4,B), FP(5,B), FP(6,B), FP(7,B), FP(8,B), FP(9,B), FP(10,B)};
+__FlashStringHelper* FTTC[]={FP(1,C), FP(2,C), FP(3,C), FP(4,C), FP(5,C), FP(6,C), FP(7,C), FP(8,C), FP(9,C), FP(10,C)};
+__FlashStringHelper* FTTD[]={FP(1,D), FP(2,D), FP(3,D), FP(4,D), FP(5,D), FP(6,D), FP(7,D), FP(8,D), FP(9,D), FP(10,D)};
 
 FRESULT fatstatus=FR_OK;
 
@@ -140,8 +184,9 @@ void display_face() {
             oled.clear();
             oled.set2X();
             oled.println(FTTA[facedisplayindex-1]);
-            oled.println();
             oled.println(FTTB[facedisplayindex-1]);
+            oled.println(FTTC[facedisplayindex-1]);
+            oled.println(FTTD[facedisplayindex-1]);
             oled.set1X();
         }
         facedisplayed=true;
@@ -280,18 +325,18 @@ void poll_for_tag(void)
 void loop_nfcmode()
 {
     poll_for_tag();
-    if (digitalRead(6) == HIGH){
+    if (digitalRead(9) == HIGH){
         delay(100);
-        if (digitalRead(6) == HIGH)
+        if (digitalRead(9) == HIGH)
         facedisplayindex++;
         if (facedisplayindex>FACES) {
           facedisplayindex=0;
         }
         facedisplayed=false;
     }
-    if (digitalRead(9) == HIGH){
+    if (digitalRead(6) == HIGH){
         delay(100);
-        if (digitalRead(9) == HIGH)
+        if (digitalRead(6) == HIGH)
         facedisplayindex--;
         if (facedisplayindex<0) {
           facedisplayindex=FACES;
