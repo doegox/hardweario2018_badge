@@ -1038,8 +1038,9 @@ int MFRC522::PICC_DumpNtagToOled(SSD1306AsciiWire oled, byte* vcard, uint16_t* p
         return -1;
     }
     uint8_t mimelength = buffer[offset+1];
-    if (mimelength != 0xc) { // vCARD type should be 0xc long
-        oled.println(F("Unsupported NDEF MIME type."));
+    
+    if ((mimelength != 12)&&(mimelength != 10)) { // vCARD type should be 10 or 12 bytes long
+        oled.println(F("Unsupported MIME type."));
         return -1;
     }
     if (buffer[offset] & 0x10) {
@@ -1060,21 +1061,38 @@ int MFRC522::PICC_DumpNtagToOled(SSD1306AsciiWire oled, byte* vcard, uint16_t* p
         return -1;
     }
 
-    if ((buffer[offset++] != 't') ||
-        (buffer[offset++] != 'e') ||
-        (buffer[offset++] != 'x') ||
-        (buffer[offset++] != 't') ||
-        (buffer[offset++] != '/') ||
-        (buffer[offset++] != 'x') ||
-        (buffer[offset++] != '-') ||
-        (buffer[offset++] != 'v') ||
-        (buffer[offset++] != 'C') ||
-        (buffer[offset++] != 'a') ||
-        (buffer[offset++] != 'r') ||
-        (buffer[offset++] != 'd')) {
-            oled.println(F("Unsupported NDEF MIME type."));
-            return -1;
+    bool mime_validated=false;
+    if ((buffer[offset] == 't') &&
+        (buffer[offset+1] == 'e') &&
+        (buffer[offset+2] == 'x') &&
+        (buffer[offset+3] == 't') &&
+        (buffer[offset+4] == '/') &&
+        (buffer[offset+5] == 'x') &&
+        (buffer[offset+6] == '-') &&
+        (buffer[offset+7] == 'v') &&
+        ((buffer[offset+8] == 'C') || (buffer[offset+8] == 'c')) &&
+        (buffer[offset+9] == 'a') &&
+        (buffer[offset+10] == 'r') &&
+        (buffer[offset+11] == 'd')) {
+        mime_validated=true;
     }
+    if ((buffer[offset] == 't') &&
+        (buffer[offset+1] == 'e') &&
+        (buffer[offset+2] == 'x') &&
+        (buffer[offset+3] == 't') &&
+        (buffer[offset+4] == '/') &&
+        (buffer[offset+5] == 'v') &&
+        ((buffer[offset+6] == 'C') || (buffer[offset+6] == 'c')) &&
+        (buffer[offset+7] == 'a') &&
+        (buffer[offset+8] == 'r') &&
+        (buffer[offset+9] == 'd')) {
+        mime_validated=true;
+    }
+    if (!mime_validated) {
+        oled.println(F("Unsupported MIME type."));
+        return -1;
+    }
+    offset+=mimelength;
 
     page += offset >> 2;
     offset &= 0x3;
