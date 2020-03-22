@@ -12,6 +12,6 @@ with the following modifications for getting it working with Hardwear.io badge a
   * all `rcall` => `call`
   * all `rjmp` => `jmp`
   * all `[...] __attribute__ ((noinline)) [...] asm("[...]");` => append `__attribute__ ((used))`
-* local copy of modified MFRC522 (from https://github.com/mdxs/MFRC522 commit `4dd8522`)
+* local copy of MFRC522 (from https://github.com/mdxs/MFRC522 commit `4dd8522`)
 
-Compiled firmware available in ../firmware_releases
+Compiled firmware available in [firmware_releases](../firmware_releases)
